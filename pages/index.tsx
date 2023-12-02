@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { Dispatch, SetStateAction, useState } from 'react'
 
 type Player = {
@@ -50,80 +51,37 @@ const EnterScore = ({ player, updatePlayer }: { player: Player; updatePlayer: Di
 }
 
 export default function Home() {
-  const [player1, setPlayer1] = useState<Player>({
-    name: 'Mrs. Butt',
-    scores: [],
-    theme: 'fuchsia',
-  })
-  const [player2, setPlayer2] = useState<Player>({
-    name: 'Mr. Butt',
-    scores: [],
-    theme: 'indigo',
-  })
-  const player1Total = player1.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
-  const player2Total = player2.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
-  const currentPlayer: Player = player1
-  const title = 'Phase 10'
+  const router = useRouter()
 
-  const scores = []
-  const length = Math.max(player1.scores.length, player2.scores.length)
-  for (let i = 0; i < length; i++) {
-    scores.push({
-      player1: player1.scores[i],
-      player2: player2.scores[i],
-    })
+  const submit = (e: any) => {
+    e.preventDefault()
+
+    const player1 = e.target[0].value
+    const player2 = e.target[1].value
+    router.push(`/play?player1=${player1}&player2=${player2}`)
   }
 
   return (
-    <main>
-      <div className="pt-6 px-6">
-        <h1 className="text-center text-4xl font-bold bg-gradient-to-r from-fuchsia-600 to-indigo-600 bg-clip-text text-transparent mb-4">{title}</h1>
-        <div className="">
-          <div className="">
-            <div className="flex justify-between items-center">
-              <Name player={player1} />
-              <Name player={player2} />
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <EnterScore player={player1} updatePlayer={setPlayer1} />
-              <EnterScore player={player2} updatePlayer={setPlayer2} />
-            </div>
-            <div className="mt-6">
-              <h3 className="font-bold text-lg mb-4 text-gray-700">Round Score Tracker</h3>
-              <table className="table-auto w-full text-center border-collapse border-2 border-gray-200">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th className="px-4 py-2 text-gray-600">Round</th>
-                    <th className={`px-4 py-2 text-${player1.theme}-600`}>{player1.name}</th>
-                    <th className={`px-4 py-2 text-${player2.theme}-600`}>{player2.name}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {scores.map((score, index) => {
-                    return (
-                      <tr key={index}>
-                        <td className="border px-4 py-2">{index + 1}</td>
-                        <td className="border px-4 py-2">{score.player1 ?? '-'}</td>
-                        <td className="border px-4 py-2">{score.player2 ?? '-'}</td>
-                      </tr>
-                    )
-                  })}
-                  <tr>
-                    <td className="border px-4 py-2">
-                      <strong>Total</strong>
-                    </td>
-                    <td className="border px-4 py-2">
-                      <span className={`font-bold text-${player1.theme}-600`}>{player1Total}</span>
-                    </td>
-                    <td className="border px-4 py-2">
-                      <span className={`font-bold text-${player2.theme}-600`}>{player2Total}</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+    <main className="p-6">
+      <h1 className="text-center text-4xl font-bold bg-gradient-to-r from-fuchsia-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+        What should our names be?
+      </h1>
+      <div className="">
+        <form onSubmit={submit}>
+          <div className="mb-4">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <label className="block">Player 1's name</label>
+            <input name="player1" type="text" className="border-2 border-gray-300 px-2 py-1" />
           </div>
-        </div>
+          <div className="mb-4">
+            {/* eslint-disable-next-line react/no-unescaped-entities */}
+            <label className="block">Player 2's name</label>
+            <input name="player2" type="text" className="border-2 border-gray-300 px-2 py-1" />
+          </div>
+          <button type="submit" className="px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white">
+            Start game
+          </button>
+        </form>
       </div>
     </main>
   )

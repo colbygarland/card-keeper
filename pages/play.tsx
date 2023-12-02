@@ -51,7 +51,7 @@ export default function Home() {
   const player1Total = player1.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const player2Total = player2.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const currentPlayer: Player = player1
-  const title = 'Phase 10'
+  const title = "Paul's Card Tracker"
 
   const scores = []
   const length = Math.max(player1.scores.length, player2.scores.length)

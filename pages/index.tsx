@@ -20,15 +20,15 @@ export default function Home() {
         <form onSubmit={submit}>
           <div className="mb-4">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <label className="block">Player 1's name</label>
-            <input name="player1" type="text" className="border-2 border-gray-300 px-2 py-1" />
+            <label className="block mb-2">Player 1's name</label>
+            <input name="player1" type="text" className="shadow rounded block px-2 py-1 w-full" />
           </div>
           <div className="mb-4">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <label className="block">Player 2's name</label>
-            <input name="player2" type="text" className="border-2 border-gray-300 px-2 py-1" />
+            <label className="block mb-2">Player 2's name</label>
+            <input name="player2" type="text" className="shadow rounded block px-2 py-1 w-full" />
           </div>
-          <button type="submit" className="px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white">
+          <button type="submit" className="mt-4 rounded px-4 py-2 bg-gradient-to-r from-fuchsia-600 to-indigo-600 text-white">
             Start game
           </button>
         </form>

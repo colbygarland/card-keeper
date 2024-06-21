@@ -26,9 +26,9 @@ const EnterScore = ({ player, name, updatePlayer }: { player: Player; name: stri
   return (
     <div className="">
       <form onSubmit={update}>
-        <label className={`font-bold ${styles?.text}`}>{name} Score</label>
-        <input type="number" className={`border-2 border-gray-200 focus:ring-2 ${styles?.focus}`} placeholder="Enter Score" />
-        <button type="submit" className={`px-2 py-1 text-sm mt-2 text-white ${styles?.bg}`}>
+        <label className={`font-bold mb-2 block ${styles?.text}`}>{name}</label>
+        <input type="number" className={`shadow rounded block px-2 py-1 w-full mb-4 ${styles?.focus}`} placeholder="Enter Score" />
+        <button type="submit" className={`block w-full px-2 py-1 text-sm mt-2 text-white rounded ${styles?.bg}`}>
           Add Score
         </button>
       </form>
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
             <div className="mt-6">
               <h3 className="font-bold text-lg mb-4 text-gray-700">Round Score Tracker</h3>
-              <table className="table-auto w-full text-center border-collapse border-2 border-gray-200">
+              <table className="table-auto w-full text-center border-collapse border-2 border-gray-200 rounded">
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="px-4 py-2 text-gray-600">Round</th>

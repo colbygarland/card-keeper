@@ -6,7 +6,17 @@ type Player = {
   theme: string
 }
 
-const EnterScore = ({ player, name, updatePlayer }: { player: Player; name: string; updatePlayer: Dispatch<SetStateAction<Player>> }) => {
+const EnterScore = ({
+  player,
+  name,
+  updatePlayer,
+  setReset,
+}: {
+  player: Player
+  name: string
+  updatePlayer: Dispatch<SetStateAction<Player>>
+  setReset: Dispatch<SetStateAction<boolean>>
+}) => {
   const styles = {
     fuchsia: { text: 'text-fuchsia-600', focus: 'border-fuchsia-300 focus:ring-fuchsia-600', bg: 'bg-fuchsia-600' },
     indigo: { text: 'text-indigo-600', focus: 'border-indigo-300 focus:ring-indigo-600', bg: 'bg-indigo-600' },
@@ -21,6 +31,8 @@ const EnterScore = ({ player, name, updatePlayer }: { player: Player; name: stri
       scores: [...prevState.scores, score],
     }))
     e.target[0].value = null
+
+    setReset(true)
   }
 
   return (
@@ -48,6 +60,7 @@ export default function Home() {
     scores: [],
     theme: 'indigo',
   })
+  const [showReset, setShowReset] = useState(false)
   const player1Total = player1.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const player2Total = player2.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const currentPlayer: Player = player1
@@ -69,8 +82,8 @@ export default function Home() {
         <div className="">
           <div className="">
             <div className="grid grid-cols-2 gap-4">
-              <EnterScore name={player1Name} player={player1} updatePlayer={setPlayer1} />
-              <EnterScore name={player2Name} player={player2} updatePlayer={setPlayer2} />
+              <EnterScore name={player1Name} player={player1} updatePlayer={setPlayer1} setReset={setShowReset} />
+              <EnterScore name={player2Name} player={player2} updatePlayer={setPlayer2} setReset={setShowReset} />
             </div>
             <div className="mt-6">
               <h3 className="font-bold text-lg mb-4 text-gray-700">Round Score Tracker</h3>
@@ -106,6 +119,13 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
+            {showReset && (
+              <div className="mt-8">
+                <a href="" className="font-bold block w-full px-2 py-1 text-sm mt-2 text-fuchsia-600 border-2 border-fuchsia-600 text-center rounded">
+                  Reset
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

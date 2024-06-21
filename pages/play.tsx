@@ -47,8 +47,8 @@ const EnterScore = ({
     <div className="">
       <form onSubmit={update}>
         <label className={`font-bold mb-2 block ${styles?.text}`}>{name}</label>
-        <input type="number" className={`shadow rounded block px-2 py-1 w-full mb-4 ${styles?.focus}`} placeholder="Enter Score" />
-        <button type="submit" className={`block w-full px-2 py-1 text-sm mt-2 text-white rounded ${styles?.bg}`}>
+        <input type="number" className={`shadow rounded block px-2 py-2 w-full mb-4 ${styles?.focus}`} placeholder="Enter Score" />
+        <button type="submit" className={`block w-full px-2 py-2 mt-2 text-white rounded ${styles?.bg}`}>
           Add Score
         </button>
       </form>

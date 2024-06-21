@@ -74,6 +74,7 @@ export default function Home() {
   })
   const [showReset, setShowReset] = useState(false)
   const [firstPlayer, setFirstPlayer] = useState<Player | null>(null)
+  const [bottomLayout, setBottomLayout] = useState(false)
   const player1Total = player1.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const player2Total = player2.scores.reduce((accumulator, currentValue) => accumulator + Number(currentValue), 0)
   const title = "Paul's Card Tracker"
@@ -96,14 +97,21 @@ export default function Home() {
 
   return (
     <main>
-      <div className="p-6">
-        <h1 className="text-center text-4xl font-bold bg-gradient-to-r from-fuchsia-600 to-indigo-600 bg-clip-text text-transparent mb-4">{title}</h1>
+      <div className={`p-6 ${bottomLayout ? 'mb-44' : ''}`}>
+        <h1
+          onClick={() => setBottomLayout(!bottomLayout)}
+          className="text-center text-4xl font-bold bg-gradient-to-r from-fuchsia-600 to-indigo-600 bg-clip-text text-transparent mb-4"
+        >
+          {title}
+        </h1>
         <div className="">
           <div className="">
-            <div className="grid grid-cols-2 gap-4">
-              <EnterScore name={player1Name} player={player1} updatePlayer={setPlayer1} setReset={setShowReset} setFirst={() => setFirst(player1)} />
-              <EnterScore name={player2Name} player={player2} updatePlayer={setPlayer2} setReset={setShowReset} setFirst={() => setFirst(player2)} />
-            </div>
+            {!bottomLayout && (
+              <div className="grid grid-cols-2 gap-4">
+                <EnterScore name={player1Name} player={player1} updatePlayer={setPlayer1} setReset={setShowReset} setFirst={() => setFirst(player1)} />
+                <EnterScore name={player2Name} player={player2} updatePlayer={setPlayer2} setReset={setShowReset} setFirst={() => setFirst(player2)} />
+              </div>
+            )}
             <div className="mt-6">
               <h3 className="font-bold text-lg mb-4 text-gray-700">Round Score Tracker</h3>
               <table className="table-auto w-full text-center border-collapse border-2 border-gray-200 rounded">
@@ -159,6 +167,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {bottomLayout && (
+        <div className="bg-white grid grid-cols-2 gap-4 fixed left-0 bottom-0 z-50 p-4 border-t-2 border-t-gray-100">
+          <EnterScore name={player1Name} player={player1} updatePlayer={setPlayer1} setReset={setShowReset} setFirst={() => setFirst(player1)} />
+          <EnterScore name={player2Name} player={player2} updatePlayer={setPlayer2} setReset={setShowReset} setFirst={() => setFirst(player2)} />
+        </div>
+      )}
     </main>
   )
 }

@@ -146,16 +146,16 @@ export default function Home() {
                 </tbody>
               </table>
             </div>
-            {showReset && (
-              <div className="mt-8 grid gap-4 grid-cols-2">
+            <div className="mt-8 grid gap-4 grid-cols-2">
+              {showReset && (
                 <a href="" className="font-bold block w-full px-2 py-1 text-sm mt-2 text-fuchsia-600 border-2 border-fuchsia-600 text-center rounded">
                   Reset
                 </a>
-                <Link href="/" className="font-bold block w-full px-2 py-1 text-sm mt-2 text-indigo-600 border-2 border-indigo-600 text-center rounded">
-                  New Names!
-                </Link>
-              </div>
-            )}
+              )}
+              <Link href="/" className="font-bold block w-full px-2 py-1 text-sm mt-2 text-indigo-600 border-2 border-indigo-600 text-center rounded">
+                New Names!
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -31,6 +31,8 @@ const EnterScore = ({
     e.preventDefault()
 
     const score = e.target[0].value
+
+    if (!score) return
     updatePlayer(prevState => ({
       ...prevState,
       scores: [...prevState.scores, score],
